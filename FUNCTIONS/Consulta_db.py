@@ -13,7 +13,7 @@ def acessar_db():
         username = "#####"
         password = "##########"
 
-        # monta os dados para enviar para o banco de dados (credenciais)
+        # Monta os dados para enviar para o banco de dados (credenciais)
         conn_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
         conn = pyodbc.connect(conn_string)
         cursor = conn.cursor()
@@ -22,16 +22,14 @@ def acessar_db():
         print("Erro ao conectar no banco")
     return conn, cursor
 
-def fechar_db():
-    # Fecha a conexão com o banco de dados.
+def fechar_db(): # Fecha a conexão com o banco de dados.
     global conn, cursor  # Utiliza as variáveis globais
     if cursor is not None:
         cursor.close()
     if conn is not None:
         conn.close()
 
-def comparar_db(cnpj):
-    # Compara o cnpj recebido no banco de dados para identificar o estabelecimento
+def comparar_db(cnpj): # Compara o cnpj recebido no banco de dados para identificar o estabelecimento
 
     global cursor  # Utiliza a variável global
     try:
@@ -39,8 +37,7 @@ def comparar_db(cnpj):
         cursor.execute(query)
         resultados = cursor.fetchall()
 
-        for resultado in resultados:
-            #Pegar a coluna no banco de dados referente ao valor que quer armazenar nessa variavel
+        for resultado in resultados: # Pegar a coluna no banco de dados referente ao valor que quer armazenar nessa variavel
             cgc_cnpj = resultado[3]
             cod_estado = resultado[8]
 
