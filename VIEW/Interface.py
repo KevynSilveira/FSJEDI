@@ -36,11 +36,6 @@ def create_frame_main(): # Criando frame principal
     f_log_retorno.insert(ctk.END, "Retorno")
     f_log_retorno.bind("<Key>", lambda e: "break")
 
-    #labels
-    status = "Parado"
-    l_status = ctk.CTkLabel(master=frame_main, text=f"Status: {status}", width=100)
-    l_status.place(x=3000, y=275)
-
     tempo = 0
     l_runtime = ctk.CTkLabel(master=frame_main, text=f"Tempo em execução: {tempo}", width=100)
     l_runtime.place(x= 180, y=275)
