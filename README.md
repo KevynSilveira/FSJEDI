@@ -1,4 +1,4 @@
-Título: Integração FTP para Importação e Processamento de Pedidos no ERP Infarma
+Integração FTP para Importação e Processamento de Pedidos no ERP Infarma
 
 Descrição:
 Este repositório contém um código desenvolvido para realizar a integração com um servidor FTP, visando a importação de arquivos de pedidos de fornecedores. O código é projetado para filtrar os arquivos de pedidos com base no CNPJ presente em cada um deles e, em seguida, compará-los com os registros armazenados em um banco de dados.
