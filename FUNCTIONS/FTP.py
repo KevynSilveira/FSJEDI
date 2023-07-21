@@ -7,25 +7,25 @@ password = ''
 ftp_envio = '/Envio/'
 pasta_local = r'C:\FSJEDI\Processamento'
 
-def connect():
+def connect(): # Faz a conexão com o FTP
     try:
         # Conectando ao servidor FTP
         ftp = FTPHost(hostname, username, password)
         print('Conectou no FTP.')
         return ftp
-    except Exception as e:
+    except Exception as e: # Exibi o erro na tela
         print(f"Ocorreu uma exceção ao conectar: {str(e)}")
         return None
 
-def close_connection(ftp):
+def close_connection(ftp): # Fecha a conexão de com o FTP
     try:
         if ftp is not None:
             ftp.close()
             print('Conexão FTP fechada.')
-    except Exception as e:
+    except Exception as e: # Exibi o erro na tela
         print(f"Ocorreu uma exceção ao fechar a conexão: {str(e)}")
 
-def download_file(ftp):
+def download_file(ftp): # Baixa os arquivos do FTP e recebe como parâmetro a conexão
     try:
         if ftp is not None:
 
@@ -45,8 +45,8 @@ def download_file(ftp):
                     ftp.remove(arquivo)
                     cont += 1
                 print(f'Foram importados {cont} arquivos.')
-    except Exception as e:
-        print(f"Ocorreu uma exceção ao baixar e deletar arquivos: {str(e)}")
+    except Exception as e: # Exibi o erro na tela
+        print(f"Ocorreu uma exceção processar os arquivos no FTP: {str(e)}")
 
 
 def run_ftp(): # Executa todos os métodos
