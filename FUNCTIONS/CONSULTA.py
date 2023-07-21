@@ -8,10 +8,10 @@ def access_db():
     global conn, cursor  # Utiliza as variáveis globais
 
     try:
-        server = "###.###.##.#"
-        database = "###"
-        username = "#####"
-        password = "##########"
+        server = ""
+        database = ""
+        username = ""
+        password = ""
 
         # Monta os dados para enviar para o banco de dados (credenciais)
         conn_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
@@ -53,3 +53,5 @@ def compare_db(cnpj): # Compara o cnpj recebido no banco de dados para identific
     except pyodbc.Error as e:
         print("Erro ao executar a consulta no banco de dados:", e)
 
+access_db()
+print(compare_db("88212113001769"))
