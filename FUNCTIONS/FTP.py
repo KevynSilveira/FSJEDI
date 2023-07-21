@@ -68,10 +68,10 @@ def run_ftp(choice): # Executa todos os métodos
     ftp = connect() # Conecta ao FTP
 
     if ftp is not None:
-        if choice == "Recebimento":
+        if choice == "Recebe":
             download_file(ftp) # Realiza as operações de baixar e deletar arquivos
             close_connection(ftp) # Fecha a conexão ao final das operações
-        elif choice == "Envio":
+        elif choice == "Envia":
             upload_file(ftp)
             close_connection()
         else:

@@ -3,7 +3,7 @@ import pyodbc
 conn = None  # Variável global para armazenar a conexão com o banco de dados
 cursor = None  # Variável global para armazenar o cursor
 
-def acessar_db():
+def access_db():
     """Acessa o banco de dados SQL Server usando as configurações do arquivo config.ini."""
     global conn, cursor  # Utiliza as variáveis globais
 
@@ -22,24 +22,24 @@ def acessar_db():
         print("Erro ao conectar no banco")
     return conn, cursor
 
-def fechar_db(): # Fecha a conexão com o banco de dados.
+def close_db(): # Fecha a conexão com o banco de dados.
     global conn, cursor  # Utiliza as variáveis globais
     if cursor is not None:
         cursor.close()
     if conn is not None:
         conn.close()
 
-def comparar_db(cnpj): # Compara o cnpj recebido no banco de dados para identificar o estabelecimento
+def compare_db(cnpj): # Compara o cnpj recebido no banco de dados para identificar o estabelecimento
 
     global cursor  # Utiliza a variável global
     try:
         query = f"SELECT * FROM CLIEN WHERE Cod_GrpCli IN (145, 146, 147) and Cgc_Cpf = '{cnpj}'"
         cursor.execute(query)
-        resultados = cursor.fetchall()
+        result = cursor.fetchall()
 
-        for resultado in resultados: # Pegar a coluna no banco de dados referente ao valor que quer armazenar nessa variavel
-            cgc_cnpj = resultado[3]
-            cod_estado = resultado[8]
+        for column in result: # Pegar a coluna no banco de dados referente ao valor que quer armazenar nessa variavel
+            cgc_cnpj = column[3]
+            cod_estado = column[8]
 
             if cgc_cnpj == cnpj: # Confere se o cnpj está batendo
                 if cod_estado == "RS":
