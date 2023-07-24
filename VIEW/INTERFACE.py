@@ -53,6 +53,5 @@ def create_frame_main(): # Criando frame principal
     update_time()
     frame_main.mainloop()
 
-
 if __name__ == "__main__":
     create_frame_main()
