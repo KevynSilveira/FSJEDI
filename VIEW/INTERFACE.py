@@ -8,9 +8,6 @@ from FUNCTIONS.FORMATA_HR import format_time
 
 tempo = 0
 
-def teste():
-    print("retorno")
-
 def create_frame_main(): # Criando frame principal
 
     global tempo
@@ -26,14 +23,6 @@ def create_frame_main(): # Criando frame principal
 
     b_pause = ctk.CTkButton(master=frame_main, width=100, height=30, text="Pausar", corner_radius=4)
     b_pause.place(x=195, y=10)
-
-    log = ["Log pedido", "Log retorno"] # Lista de texto para o botão
-    b_log = ctk.CTkButton(master=frame_main, width=100, height=30, text=log[1], corner_radius=4)
-    b_log.place(x=305, y=10)
-
-    log = ["Log pedido", "Log retorno"] # Lista de texto para o botão
-    b_log = ctk.CTkButton(master=frame_main, width=100, height=30 ,text=log[1], corner_radius=4, command=teste)
-    b_log.place(x=305, y=10)
 
     # Frame log
     f_log_request = ctk.CTkTextbox(master=frame_main, width=235 , height=200)
