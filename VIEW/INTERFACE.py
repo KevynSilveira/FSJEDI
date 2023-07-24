@@ -3,11 +3,17 @@
 # Adicionando imports
 import customtkinter as ctk # precisa do comando (pip install customtkinter)
 from FUNCTIONS.REDIRECIONA import redirect_print
+import datetime
+from FUNCTIONS.FORMATA_HR import format_time
+
+tempo = 0
 
 def teste():
     print("retorno")
 
 def create_frame_main(): # Criando frame principal
+
+    global tempo
 
     frame_main = ctk.CTk()
     frame_main.geometry("500x300") # Defini a largura e altura do frame respectivamente
@@ -42,9 +48,16 @@ def create_frame_main(): # Criando frame principal
 
     redirect_print(f_log_request, f_log_return)
 
-    tempo = 0
     l_runtime = ctk.CTkLabel(master=frame_main, text=f"Tempo em execução: {tempo}", width=100)
-    l_runtime.place(x= 180, y=275)
+    l_runtime.place(x=180, y=275)
+
+    def update_time(): # Atualiza o tempo a cada 1 segundo
+        global tempo
+        nonlocal l_runtime
+        tempo += 1
+        formatted_time = format_time(tempo)
+        l_runtime.configure(text=f"Tempo em execução: {formatted_time}")
+        frame_main.after(1000, update_time)
 
     l_pedido = ctk.CTkLabel(master=frame_main, text="LOG PEDIDO", width=100)
     l_pedido.place(x=77, y=45)
@@ -52,7 +65,7 @@ def create_frame_main(): # Criando frame principal
     l_retono = ctk.CTkLabel(master=frame_main, text="LOG RETORNO", width=100)
     l_retono.place(x=330, y=45)
 
-
+    update_time()
     frame_main.mainloop()
 
 
