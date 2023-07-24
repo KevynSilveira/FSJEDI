@@ -32,12 +32,12 @@ def create_frame_main(): # Criando frame principal
     # Frame log
     f_log_request = ctk.CTkTextbox(master=frame_main, width=235 , height=200)
     f_log_request.place(x=10, y=75)
-    f_log_request.insert(ctk.END, "Pedido")
+    #f_log_request.insert(ctk.END, "Pedido")
     f_log_request.bind("<Key>", lambda e: "break")
 
     f_log_return = ctk.CTkTextbox(master=frame_main, width=235 , height=200)
     f_log_return.place(x=255, y=75)
-    f_log_return.insert(ctk.END, "Retorno")
+    #f_log_return.insert(ctk.END, "Retorno")
     f_log_return.bind("<Key>", lambda e: "break")
 
     redirect_print(f_log_request, f_log_return)
