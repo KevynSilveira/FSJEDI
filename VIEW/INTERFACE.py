@@ -2,6 +2,10 @@
 
 # Adicionando imports
 import customtkinter as ctk # precisa do comando (pip install customtkinter)
+from FUNCTIONS.REDIRECIONA import redirect_print
+
+def teste():
+    print("retorno")
 
 def create_frame_main(): # Criando frame principal
 
@@ -22,19 +26,21 @@ def create_frame_main(): # Criando frame principal
     b_log.place(x=305, y=10)
 
     log = ["Log pedido", "Log retorno"] # Lista de texto para o botão
-    b_log = ctk.CTkButton(master=frame_main, width=100, height=30, text=log[1], corner_radius=4)
+    b_log = ctk.CTkButton(master=frame_main, width=100, height=30 ,text=log[1], corner_radius=4, command=teste)
     b_log.place(x=305, y=10)
 
     # Frame log
-    f_log_pedido = ctk.CTkTextbox(master=frame_main, width= 235, height=200)
-    f_log_pedido.place(x=10, y=75)
-    f_log_pedido.insert(ctk.END, "Pedido")
-    f_log_pedido.bind("<Key>", lambda e: "break")
+    f_log_request = ctk.CTkTextbox(master=frame_main, width=235 , height=200)
+    f_log_request.place(x=10, y=75)
+    f_log_request.insert(ctk.END, "Pedido")
+    f_log_request.bind("<Key>", lambda e: "break")
 
-    f_log_retorno = ctk.CTkTextbox(master=frame_main, width= 235, height=200)
-    f_log_retorno.place(x=255, y=75)
-    f_log_retorno.insert(ctk.END, "Retorno")
-    f_log_retorno.bind("<Key>", lambda e: "break")
+    f_log_return = ctk.CTkTextbox(master=frame_main, width=235 , height=200)
+    f_log_return.place(x=255, y=75)
+    f_log_return.insert(ctk.END, "Retorno")
+    f_log_return.bind("<Key>", lambda e: "break")
+
+    redirect_print(f_log_request, f_log_return)
 
     tempo = 0
     l_runtime = ctk.CTkLabel(master=frame_main, text=f"Tempo em execução: {tempo}", width=100)
@@ -46,7 +52,9 @@ def create_frame_main(): # Criando frame principal
     l_retono = ctk.CTkLabel(master=frame_main, text="LOG RETORNO", width=100)
     l_retono.place(x=330, y=45)
 
+
     frame_main.mainloop()
+
 
 if __name__ == "__main__":
     create_frame_main()
