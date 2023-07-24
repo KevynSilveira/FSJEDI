@@ -4,7 +4,8 @@ from ftputil import FTPHost
 hostname = ''
 username = ''
 password = ''
-ftp_path = '/Envio/'
+ftp_request_folder = '/Envio/'
+ftp_return_folder = '/Retorno'
 receive_local_folder = r'C:\FSJEDI\Recebimento'
 upload_local_folder = r'C:\FSJEDI\Envio'
 
@@ -30,7 +31,7 @@ def download_file(ftp): # Baixa os arquivos do FTP e recebe como parâmetro a co
     try:
         if ftp is not None:
 
-            ftp.chdir(ftp_path) # Navegando para o diretório remoto
+            ftp.chdir(ftp_request_folder) # Navegando para o diretório remoto
             lista_arquivos = ftp.listdir(ftp.curdir) # Obtendo a lista de arquivos no diretório remoto
             quantidade_arquivos = len(lista_arquivos) # Obtém a quantidade de arquivos na pasta
 
@@ -54,11 +55,11 @@ def upload_file(ftp): # Envia arquivos para o FTP
     try:
         if ftp is not None: # Verifica conexão com o ftp
 
-            ftp.chdir(ftp_path) # Navegando para o diretório remoto
-            caminho_remoto = ftp.path.join(ftp.curdir,upload_local_folder) # Faz o caminho para o envio do arquivo
-            ftp.upload(upload_local_folder, caminho_remoto) # Enviando o arquivo
+            ftp.chdir(ftp_return_folder) # Navegando para o diretório remoto
+            ftp_path = ftp.path.join(ftp.curdir, upload_local_folder) # Faz o caminho para o envio do arquivo
+            ftp.upload(upload_local_folder, ftp_path) # Enviando o arquivo
 
-            print(f'O arquivo "{upload_local_folder}" foi enviado para o diretório remoto "{ftp_path}".')
+            print(f'O arquivo "{upload_local_folder}" foi enviado para o diretório remoto "{ftp_return_folder}".')
 
     except Exception as e:
         print(f"Ocorreu uma exceção: {str(e)}")
