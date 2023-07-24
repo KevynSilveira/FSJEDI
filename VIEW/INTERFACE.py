@@ -49,7 +49,7 @@ def create_frame_main(): # Criando frame principal
     redirect_print(f_log_request, f_log_return)
 
     l_runtime = ctk.CTkLabel(master=frame_main, text=f"Tempo em execução: {tempo}", width=100)
-    l_runtime.place(x=180, y=275)
+    l_runtime.place(x=150, y=275)
 
     def update_time(): # Atualiza o tempo a cada 1 segundo
         global tempo
