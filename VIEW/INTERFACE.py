@@ -6,6 +6,7 @@ from FUNCTIONS.BOTAO import stop
 
 tempo = 0
 
+
 def create_frame_main(): # Criando frame principal
 
     global tempo
