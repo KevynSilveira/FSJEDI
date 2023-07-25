@@ -1,6 +1,8 @@
 import customtkinter as ctk # precisa do comando (pip install customtkinter)
 from FUNCTIONS.LOG import redirect_print
 from FUNCTIONS.FORMATA_HR import format_time
+from FUNCTIONS.BOTAO import start
+from FUNCTIONS.BOTAO import stop
 
 tempo = 0
 
@@ -14,11 +16,11 @@ def create_frame_main(): # Criando frame principal
     frame_main.resizable(False, False) # Tira a opção de maximizar
 
     # Criando botões de execução (start, pause, log)
-    b_start = ctk.CTkButton(master=frame_main, width=100, height=30, text="Iniciar", corner_radius=4)
+    b_start = ctk.CTkButton(master=frame_main, width=100, height=30, text="Iniciar", corner_radius=4, command=start)
     b_start.place(x=145, y=10)
 
-    b_pause = ctk.CTkButton(master=frame_main, width=100, height=30, text="Pausar", corner_radius=4)
-    b_pause.place(x=255, y=10)
+    b_stop = ctk.CTkButton(master=frame_main, width=100, height=30, text="Pausar", corner_radius=4, command=stop)
+    b_stop.place(x=255, y=10)
 
     # Frame log
     f_log_request = ctk.CTkTextbox(master=frame_main, width=235 , height=200)
