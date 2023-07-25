@@ -74,7 +74,7 @@ def run_ftp(choice): # Executa todos os métodos
             close_connection(ftp) # Fecha a conexão ao final das operações
         elif choice == "Envia":
             upload_file(ftp)
-            close_connection()
+            close_connection(ftp)
         else:
             print(f"O valor {choice} não corresponde aos parametros pré definidos, verifique o valor inserido!")
     else:

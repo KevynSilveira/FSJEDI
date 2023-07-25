@@ -1,5 +1,5 @@
 import customtkinter as ctk # precisa do comando (pip install customtkinter)
-from FUNCTIONS.REDIRECIONA import redirect_print
+from FUNCTIONS.LOG import redirect_print
 from FUNCTIONS.FORMATA_HR import format_time
 
 tempo = 0
