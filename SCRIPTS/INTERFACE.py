@@ -1,11 +1,10 @@
 import customtkinter as ctk # precisa do comando (pip install customtkinter)
-from FUNCTIONS.LOG import redirect_print
-from FUNCTIONS.FORMATA_HR import format_time
-from FUNCTIONS.BOTAO import start
-from FUNCTIONS.BOTAO import stop
+from LOG import redirect_print
+from FORMATA_HR import format_time
+from BOTAO import start
+from BOTAO import stop
 
 tempo = 0
-
 
 def create_frame_main(): # Criando frame principal
 

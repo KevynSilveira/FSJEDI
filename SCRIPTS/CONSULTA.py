@@ -52,6 +52,3 @@ def compare_db(cnpj): # Compara o cnpj recebido no banco de dados para identific
 
     except pyodbc.Error as e:
         print("Erro ao executar a consulta no banco de dados:", e)
-
-access_db()
-print(compare_db("88212113001769"))
