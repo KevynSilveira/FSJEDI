@@ -1,5 +1,6 @@
 import os
 from ftputil import FTPHost
+from tkinter import messagebox
 
 hostname = ''
 username = ''
@@ -31,7 +32,8 @@ def close_connection(ftp): # Fecha a conexão de com o FTP
     except Exception as e: # Exibi o erro na tela
         print(f"Ocorreu uma exceção ao fechar a conexão: {str(e)}")
 
-def download_file(ftp): # Baixa os arquivos do FTP e recebe como parâmetro a conexão
+def download_file(): # Baixa os arquivos do FTP e recebe como parâmetro a conexão
+    ftp = connect()
     try:
 
         if ftp is not None:
@@ -58,36 +60,39 @@ def download_file(ftp): # Baixa os arquivos do FTP e recebe como parâmetro a co
         print(f"Ocorreu uma exceção processar os arquivos no FTP: {str(e)}")
 
 
-def upload_file(ftp): # Envia arquivos para o FTP
+def upload_file(): # Envia os retorno para o ftp
+
+    ftp = connect() # Faz a conexão com o FTP
     try:
+        global ftp_return_folder, upload_local_folder
 
-        if ftp is not None: # Verifica conexão com o ftp
+        if ftp is None: # Se a pasta não estiver disponivel ele da uma mensagem
+            messagebox.showerror("Atenção", "Conexão FTP não está disponível.")
+            return
 
-            ftp.chdir(ftp_return_folder) # Navegando para o diretório remoto
-            ftp_path = ftp.path.join(ftp.curdir, upload_local_folder) # Faz o caminho para o envio do arquivo
-            ftp.upload(upload_local_folder, ftp_path) # Enviando o arquivo
+        if not os.path.exists(upload_local_folder): # Se o diretório não existir ele da uma mensagem
+            messagebox.showerror("Atenção", "Diretório local não existe.")
+            return
 
-            print(f'O arquivo "{upload_local_folder}" foi enviado para o diretório remoto "{ftp_return_folder}".')
+        ftp.cwd(ftp_return_folder) # Navega até o diretório
+
+        for filename in os.listdir(upload_local_folder):
+            if filename.endswith(".txt"): # faz a varredura no diretório, procurando arquivos .txt
+
+                local_path = os.path.join(upload_local_folder, filename)
+                remote_path = os.path.join(ftp_return_folder, filename)
+
+                with open(local_path, "rb") as file:
+                    ftp.storbinary(f"STOR {remote_path}", file)
+
+                os.remove(local_path)
+                print(f"Arquivo '{filename}' enviado e removido localmente.")
+
+        messagebox.showinfo("CONCLUIDO", "Todos os retornos foram enviados com sucesso!")
 
     except Exception as e:
-        print(f"Ocorreu uma exceção: {str(e)}")
+        messagebox.showerror("ATANÇÃO, "f"Ocorreu uma exceção: {str(e)}")
 
 
-def run_ftp(choice): # Executa todos os métodos
-
-    ftp = connect() # Conecta ao FTP
-
-    if ftp is not None:
-
-        if choice == "Recebe":
-            download_file(ftp) # Realiza as operações de baixar e deletar arquivos
-            close_connection(ftp) # Fecha a conexão ao final das operações
-        elif choice == "Envia":
-            upload_file(ftp)
-            close_connection(ftp)
-        else:
-            print(f"O valor {choice} não corresponde aos parametros pré definidos, verifique o valor inserido!")
-    else:
-        print("Conexão com FTP falhou!")
 
 

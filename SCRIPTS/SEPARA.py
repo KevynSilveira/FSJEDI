@@ -25,6 +25,7 @@ def separate_file(): # Separa e envia os arquivos por estabelecimento
 
     try:
         file_list = os.listdir(directory_origin) # Armazena a lista dos arquivos presente na pasta
+
         for file in file_list: # Faz uma varredura da lista de arquivo, acessando arquivo por arquivo
 
             if file.endswith('.txt'): # Verifica se é um arquivo .txt
