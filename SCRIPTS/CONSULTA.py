@@ -18,12 +18,15 @@ def access_db():
         conn = pyodbc.connect(conn_string)
         cursor = conn.cursor()
         print("Conexão concluida!")
+
     except:
         print("Erro ao conectar no banco")
     return conn, cursor
 
 def close_db(): # Fecha a conexão com o banco de dados.
+
     global conn, cursor  # Utiliza as variáveis globais
+
     if cursor is not None:
         cursor.close()
     if conn is not None:
@@ -42,12 +45,15 @@ def compare_db(cnpj): # Compara o cnpj recebido no banco de dados para identific
             cod_estado = column[8]
 
             if cgc_cnpj == cnpj: # Confere se o cnpj está batendo
+
                 if cod_estado == "RS":
                     return 'RS'
                 elif cod_estado == "SC" or cod_estado == "PR":
                     return 'SC'
+
             else: # Caso não volte nenhum retorno o cliente não tem cadastro
                 return 'Sem cadastro'
+
             break
 
     except pyodbc.Error as e:

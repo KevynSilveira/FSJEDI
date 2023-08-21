@@ -35,6 +35,7 @@ def separate_file(): # Separa e envia os arquivos por estabelecimento
                     continue
 
                 with open(origin_file_path, 'r') as file_txt: # Abre os arquivos para leitura
+
                     file_client = file_txt.readline() # Armazena a primeira linha do arquivo
                     cnpj_client = file_client[1:15] # Pega o CNPJ do cliente no arquivo
                     establishment = compare_db(cnpj_client) # Compara o cnpj no banco de dados
@@ -44,8 +45,10 @@ def separate_file(): # Separa e envia os arquivos por estabelecimento
 
                 if establishment == "RS": # Verifica se o arquivo é do rs
                     shutil.move(origin_file_path, destination_directory_rs)
+
                 elif establishment == "SC": # Verifica se o arquivo é do rs
                     shutil.move(origin_file_path, destination_directory_sc)
+
                 else: # Retorno caso o termo SC ou RS não seja armazenado corretamente na variavel
                     print("Retorno esta incorreto")
 
@@ -58,5 +61,6 @@ def separate_file(): # Separa e envia os arquivos por estabelecimento
         close_db() # Fecha a conexão com o banco de dados.
 
         time.sleep(300)  # Pausa de 5 minutos antes da próxima verificação
+
     except FileNotFoundError:
         print("O arquivo não foi encontrado!")

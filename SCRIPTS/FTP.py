@@ -10,25 +10,30 @@ receive_local_folder = r'C:\FSJEDI\Recebimento'
 upload_local_folder = r'C:\FSJEDI\Envio'
 
 def connect(): # Faz a conexão com o FTP
-    try:
-        # Conectando ao servidor FTP
+    try: # Conectando ao servidor FTP
+
         ftp = FTPHost(hostname, username, password)
         print('Conectou no FTP.')
+
         return ftp
+
     except Exception as e: # Exibi o erro na tela
         print(f"Ocorreu uma exceção ao conectar: {str(e)}")
         return None
 
 def close_connection(ftp): # Fecha a conexão de com o FTP
     try:
+
         if ftp is not None:
             ftp.close()
             print('Conexão FTP fechada.')
+
     except Exception as e: # Exibi o erro na tela
         print(f"Ocorreu uma exceção ao fechar a conexão: {str(e)}")
 
 def download_file(ftp): # Baixa os arquivos do FTP e recebe como parâmetro a conexão
     try:
+
         if ftp is not None:
 
             ftp.chdir(ftp_request_folder) # Navegando para o diretório remoto
@@ -37,22 +42,25 @@ def download_file(ftp): # Baixa os arquivos do FTP e recebe como parâmetro a co
 
             if quantidade_arquivos == 0: # Se os
                 print('A pasta está vazia.')
+
             else:
                 print(f"Número de arquivos na pasta: {quantidade_arquivos}")
                 cont = 0
-                # Movendo os arquivos para a pasta local
-                for arquivo in lista_arquivos:
+
+                for arquivo in lista_arquivos: # Movendo os arquivos para a pasta local
                     caminho_local = os.path.join(receive_local_folder, arquivo)
                     ftp.download(arquivo, caminho_local)
                     ftp.remove(arquivo)
                     cont += 1
                 print(f'Foram importados {cont} arquivos.')
+
     except Exception as e: # Exibi o erro na tela
         print(f"Ocorreu uma exceção processar os arquivos no FTP: {str(e)}")
 
 
 def upload_file(ftp): # Envia arquivos para o FTP
     try:
+
         if ftp is not None: # Verifica conexão com o ftp
 
             ftp.chdir(ftp_return_folder) # Navegando para o diretório remoto
@@ -66,9 +74,11 @@ def upload_file(ftp): # Envia arquivos para o FTP
 
 
 def run_ftp(choice): # Executa todos os métodos
+
     ftp = connect() # Conecta ao FTP
 
     if ftp is not None:
+
         if choice == "Recebe":
             download_file(ftp) # Realiza as operações de baixar e deletar arquivos
             close_connection(ftp) # Fecha a conexão ao final das operações
