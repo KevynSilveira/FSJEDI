@@ -1,4 +1,5 @@
 import os
+import time
 from ftputil import FTPHost
 from tkinter import messagebox
 
@@ -8,7 +9,8 @@ password = ''
 ftp_request_folder = '/Envio/'
 ftp_return_folder = '/Retorno'
 receive_local_folder = r'C:\FSJEDI\Recebimento'
-upload_local_folder = r'C:\FSJEDI\Envio'
+upload_local_folder_sc = r'C:\FSJEDI\Envio'
+upload_local_folder_rs = r'C:\FSJEDI\Envio'
 
 def connect(): # Faz a conexão com o FTP
     try: # Conectando ao servidor FTP
@@ -42,7 +44,7 @@ def download_file(): # Baixa os arquivos do FTP e recebe como parâmetro a conex
             lista_arquivos = ftp.listdir(ftp.curdir) # Obtendo a lista de arquivos no diretório remoto
             quantidade_arquivos = len(lista_arquivos) # Obtém a quantidade de arquivos na pasta
 
-            if quantidade_arquivos == 0: # Se os
+            if quantidade_arquivos == 0:
                 print('A pasta está vazia.')
 
             else:
@@ -62,36 +64,40 @@ def download_file(): # Baixa os arquivos do FTP e recebe como parâmetro a conex
 
 def upload_file(): # Envia os retorno para o ftp
 
-    ftp = connect() # Faz a conexão com o FTP
+    ftp = connect()  # Establish FTP connection
     try:
-        global ftp_return_folder, upload_local_folder
+        global ftp_return_folder, upload_local_folder_sc, upload_local_folder_rs
 
-        if ftp is None: # Se a pasta não estiver disponivel ele da uma mensagem
+        if ftp is None:
             messagebox.showerror("Atenção", "Conexão FTP não está disponível.")
             return
 
-        if not os.path.exists(upload_local_folder): # Se o diretório não existir ele da uma mensagem
-            messagebox.showerror("Atenção", "Diretório local não existe.")
-            return
+        folders_to_upload = [upload_local_folder_sc, upload_local_folder_rs]
 
-        ftp.cwd(ftp_return_folder) # Navega até o diretório
+        for upload_local_folder in folders_to_upload:
+            if not os.path.exists(upload_local_folder):
+                messagebox.showerror("Atenção", "Diretório local não existe.")
+                continue
 
-        for filename in os.listdir(upload_local_folder):
-            if filename.endswith(".txt"): # faz a varredura no diretório, procurando arquivos .txt
+            ftp.cwd(ftp_return_folder)
 
-                local_path = os.path.join(upload_local_folder, filename)
-                remote_path = os.path.join(ftp_return_folder, filename)
+            for filename in os.listdir(upload_local_folder):
+                if filename.endswith(".txt"):
+                    local_path = os.path.join(upload_local_folder, filename)
+                    remote_path = os.path.join(ftp_return_folder, filename)
 
-                with open(local_path, "rb") as file:
-                    ftp.storbinary(f"STOR {remote_path}", file)
+                    with open(local_path, "rb") as file:
+                        ftp.storbinary(f"STOR {remote_path}", file)
 
-                os.remove(local_path)
-                print(f"Arquivo '{filename}' enviado e removido localmente.")
+                    os.remove(local_path)
+                    print(f"Arquivo '{filename}' enviado e removido localmente.")
 
-        messagebox.showinfo("CONCLUIDO", "Todos os retornos foram enviados com sucesso!")
+                time.sleep(180)  # Delay of 3 minutes (180 seconds)
+
+        messagebox.showinfo("CONCLUÍDO", "Todos os retornos foram enviados com sucesso!")
 
     except Exception as e:
-        messagebox.showerror("ATANÇÃO, "f"Ocorreu uma exceção: {str(e)}")
+        messagebox.showerror("ATENÇÃO", f"Ocorreu uma exceção: {str(e)}")
 
 
 
