@@ -1,5 +1,4 @@
 import customtkinter as ctk # precisa do comando (pip install customtkinter)
-#from LOG import redirect_print
 from FORMATA_HR import format_time
 from BOTAO import start
 from BOTAO import stop
