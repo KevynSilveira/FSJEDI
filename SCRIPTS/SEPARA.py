@@ -10,8 +10,8 @@ file_client = "" # Armazena o arquivo do cliente
 cnpj_client = "" # Armazena o cnpj do cliente
 establishment = ""
 directory_origin = r"C:\FSJEDI\Processamento" # Diretório local
-directory_sc = r"C:\Users\Kevyn\Documents\Destino\SC" # Diretório de envio sc
-directory_rs = r"C:\Users\Kevyn\Documents\Destino\RS" # Diretório de envio rs
+directory_sc = r"D:\MEDMAIS\São João\SC\Envio" # Diretório de envio sc
+directory_rs = r"D:\MEDMAIS\São João\RS\Envio" # Diretório de envio rs
 
 total_processed_files = 0 # Total de arquivos processados
 
