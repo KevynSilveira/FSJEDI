@@ -8,9 +8,9 @@ username = ''
 password = ''
 ftp_request_folder = '/Envio/'
 ftp_return_folder = '/Retorno'
-receive_local_folder = r'C:\FSJEDI\Recebimento'
-upload_local_folder_sc = r'C:\FSJEDI\Envio'
-upload_local_folder_rs = r'C:\FSJEDI\Envio'
+receive_local_folder = r'C:\FSJEDI\Processamento'
+upload_local_folder_sc = r'D:\MEDMAIS\São João\SC\Retorno'
+upload_local_folder_rs = r'D:\MEDMAIS\São João\RS\Retorno'
 
 def connect(): # Faz a conexão com o FTP
     try: # Conectando ao servidor FTP
@@ -26,7 +26,6 @@ def connect(): # Faz a conexão com o FTP
 
 def close_connection(ftp): # Fecha a conexão de com o FTP
     try:
-
         if ftp is not None:
             ftp.close()
             print('Conexão FTP fechada.')
@@ -46,7 +45,6 @@ def download_file(): # Baixa os arquivos do FTP e recebe como parâmetro a conex
 
             if quantidade_arquivos == 0:
                 print('A pasta está vazia.')
-
             else:
                 print(f"Número de arquivos na pasta: {quantidade_arquivos}")
                 cont = 0
