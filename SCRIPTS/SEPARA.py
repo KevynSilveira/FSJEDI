@@ -20,7 +20,6 @@ def separate_file(): # Separa e envia os arquivos por estabelecimento
     # Chama as variaveis globais
     global cnpj_client, file_client, directory_rs, directory_sc, directory_origin, total_processed_files, establishment, status
 
-
     access_db() # Acessa o banco de dados.
 
     try:
@@ -56,11 +55,9 @@ def separate_file(): # Separa e envia os arquivos por estabelecimento
                 total_processed_files += 1 # Soma mais um em arquivos processados
 
                 print(f"O arquivo {file} foi processado!")
-
             print(f"Total de arquivos processados {total_processed_files}")
 
         close_db() # Fecha a conexão com o banco de dados.
-
         time.sleep(300)  # Pausa de 5 minutos antes da próxima verificação
 
     except FileNotFoundError:
