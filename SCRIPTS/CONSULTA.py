@@ -4,7 +4,6 @@ conn = None  # Variável global para armazenar a conexão com o banco de dados
 cursor = None  # Variável global para armazenar o cursor
 
 def access_db():
-    """Acessa o banco de dados SQL Server usando as configurações do arquivo config.ini."""
     global conn, cursor  # Utiliza as variáveis globais
 
     try:
@@ -53,7 +52,6 @@ def compare_db(cnpj): # Compara o cnpj recebido no banco de dados para identific
 
             else: # Caso não volte nenhum retorno o cliente não tem cadastro
                 return 'Sem cadastro'
-
             break
 
     except pyodbc.Error as e:
