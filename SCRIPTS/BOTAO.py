@@ -3,13 +3,13 @@ import threading
 import time
 import FTP
 
-choice = ["Recebe", "Envia"]
 status = False
 stop_processing = True
 
 def start():
+
     try:
-        global choice, status, stop_processing
+        global status, stop_processing
 
         status = True
         stop_processing = False
