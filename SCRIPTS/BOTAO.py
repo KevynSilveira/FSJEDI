@@ -35,7 +35,7 @@ def process_upload():
             if stop_processing:
                 break
             FTP.upload_file()
-            time.sleep(180)  # Add delay between upload iterations
+            time.sleep(180)
 
     except Exception as e:
         print("Upload error:", str(e))
@@ -46,7 +46,7 @@ def process_download():
             if stop_processing:
                 break
             FTP.download_file()
-            separate_file()  # Call separate_file() after each download operation
+            separate_file()
 
     except Exception as e:
         print("Download error:", str(e))
