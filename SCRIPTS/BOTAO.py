@@ -23,7 +23,7 @@ def start():
         upload_thread.join()
         download_thread.join()
 
-        separate_file()  # Separate file operations after both upload and download are done
+        separate_file()
 
     except Exception as e:
         # Handle exceptions
