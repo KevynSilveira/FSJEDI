@@ -26,7 +26,7 @@ def start():
         separate_file()
 
     except Exception as e:
-        # Handle exceptions
+
         print("An error occurred:", str(e))
 
 def process_upload():
