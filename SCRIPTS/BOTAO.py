@@ -4,55 +4,46 @@ import time
 import FTP
 
 status = False
-stop_processing = True
+stop_processing = threading.Event()  # Usar um threading.Event para sinalizar parada
 
-def start(): # Botão de start com processamento com thread
-
-    try:
-        global status, stop_processing
-
+def start():
+    global status
+    if not status:
         status = True
-        stop_processing = False
-
+        stop_processing.clear()  # Limpar o sinal para permitir a execução das threads
         upload_thread = threading.Thread(target=process_upload)
         download_thread = threading.Thread(target=process_download)
-
         upload_thread.start()
         download_thread.start()
 
-        upload_thread.join()
-        download_thread.join()
-
-        separate_file()
-
-    except Exception as e:
-
-        print("An error occurred:", str(e))
-
-def process_upload(): # Processo de upload em looping
+def process_upload():
     try:
-        while status:
-            if stop_processing:
-                break
+        while not stop_processing.is_set():  # Verificar o sinal para parar
             FTP.upload_file()
-            time.sleep(180)
 
     except Exception as e:
         print("Upload error:", str(e))
 
-def process_download(): # Processo de download em looping
+    finally:
+        time.sleep(180)
+
+def process_download():
     try:
-        while status:
-            if stop_processing:
-                break
+        while not stop_processing.is_set():  # Verificar o sinal para parar
             FTP.download_file()
-            separate_file()
+
+        separate_file()  # Executar a separação após o download ser interrompido
 
     except Exception as e:
         print("Download error:", str(e))
 
-def stop(): # Botão de stop com atribuições de variaveis globais
+    finally:
+        time.sleep(180)
 
-    global status, stop_processing
-    status = False
-    stop_processing = True
+def stop():
+    global status
+    if status:
+        status = False
+        stop_processing.set()  # Definir o sinal para parar as threads
+
+

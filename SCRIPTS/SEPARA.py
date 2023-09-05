@@ -57,8 +57,12 @@ def separate_file(): # Separa e envia os arquivos por estabelecimento
                 print(f"O arquivo {file} foi processado!")
             print(f"Total de arquivos processados {total_processed_files}")
 
-        close_db() # Fecha a conexão com o banco de dados.
-        time.sleep(300)  # Pausa de 5 minutos antes da próxima verificação
-
     except FileNotFoundError:
         print("O arquivo não foi encontrado!")
+
+    finally:
+        close_db()  # Fecha a conexão com o banco de dados.
+        last_processing_time = time.strftime("%H:%M:%S")
+        print(f"Último processamento em: {last_processing_time}")
+        time.sleep(300)  # Pausa de 5 minutos antes da próxima verificação
+

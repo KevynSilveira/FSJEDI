@@ -60,9 +60,13 @@ def download_file(): # Baixa os arquivos do FTP e recebe como parâmetro a conex
         print(f"Ocorreu uma exceção processar os arquivos no FTP: {str(e)}")
 
 
-def upload_file(): # Envia os retorno para o ftp
+    finally:
+        close_connection(ftp)
+        last_processing_time = time.strftime("%H:%M:%S")
+        print(f"Último processamento em: {last_processing_time}")
 
-    ftp = connect()  # Establish FTP connection
+def upload_file():  # Envia os retornos para o FTP
+    ftp = connect()  # Estabelece a conexão FTP
     try:
         global ftp_return_folder, upload_local_folder_sc, upload_local_folder_rs
 
@@ -77,26 +81,31 @@ def upload_file(): # Envia os retorno para o ftp
                 messagebox.showerror("Atenção", "Diretório local não existe.")
                 continue
 
-            ftp.cwd(ftp_return_folder)
+            ftp.chdir(ftp_return_folder)
 
             for filename in os.listdir(upload_local_folder):
                 if filename.endswith(".ret"):
                     local_path = os.path.join(upload_local_folder, filename)
-                    remote_path = os.path.join(ftp_return_folder, filename)
+                    new_filename = os.path.splitext(filename)[0] + ".RET"  # Troca a extensão para .RET
+                    remote_path = os.path.join(ftp_return_folder, new_filename)
 
                     with open(local_path, "rb") as file:
                         ftp.storbinary(f"STOR {remote_path}", file)
 
                     os.remove(local_path)
-                    print(f"Arquivo '{filename}' enviado e removido localmente.")
+                    print(f"Arquivo '{filename}' enviado como '{new_filename}' e removido localmente.")
 
-                time.sleep(180)  # Delay of 3 minutes (180 seconds)
+                time.sleep(180)  # Delay de 3 minutos (180 segundos)
 
-        messagebox.showinfo("CONCLUÍDO", "Todos os retornos foram enviados com sucesso!")
+        print("Todos os retornos foram enviados com sucesso!")
 
     except Exception as e:
         messagebox.showerror("ATENÇÃO", f"Ocorreu uma exceção: {str(e)}")
 
+    finally:
+        close_connection(ftp)
+        last_processing_time = time.strftime("%H:%M:%S")
+        print(f"Último processamento em: {last_processing_time}")
 
 
 
