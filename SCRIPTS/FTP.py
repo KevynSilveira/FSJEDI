@@ -80,7 +80,7 @@ def upload_file(): # Envia os retorno para o ftp
             ftp.cwd(ftp_return_folder)
 
             for filename in os.listdir(upload_local_folder):
-                if filename.endswith(".txt"):
+                if filename.endswith(".ret"):
                     local_path = os.path.join(upload_local_folder, filename)
                     remote_path = os.path.join(ftp_return_folder, filename)
 
