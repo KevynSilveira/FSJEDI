@@ -2,6 +2,8 @@ import customtkinter as ctk # precisa do comando (pip install customtkinter)
 from FORMATA_HR import format_time
 from BOTAO import start
 from BOTAO import stop
+from LOG import StdoutRedirector
+import sys
 
 tempo = 0
 
@@ -32,12 +34,13 @@ def create_frame_main(): # Criando frame principal
     b_stop.place(x=5, y=130)
 
     log = ctk.CTkTextbox(master=frame_main, width=300, height=145)
+    log.configure(font=("arial", 12))
     log.place(x=120, y=55)
 
     l_runtime = ctk.CTkLabel(master=frame_main, text=f": {tempo}", width=100)
     l_runtime.place(x=165, y=200)
 
-
+    sys.stdout = StdoutRedirector(log) # Log com todos os print do código.
 
     def update_time(): # Atualiza o tempo a cada 1 segundo
         global tempo
