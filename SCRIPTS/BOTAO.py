@@ -6,7 +6,7 @@ import FTP
 status = False
 stop_processing = True
 
-def start():
+def start(): # Botão de start com processamento com thread
 
     try:
         global status, stop_processing
@@ -29,7 +29,7 @@ def start():
 
         print("An error occurred:", str(e))
 
-def process_upload():
+def process_upload(): # Processo de upload em looping
     try:
         while status:
             if stop_processing:
@@ -40,7 +40,7 @@ def process_upload():
     except Exception as e:
         print("Upload error:", str(e))
 
-def process_download():
+def process_download(): # Processo de download em looping
     try:
         while status:
             if stop_processing:
@@ -51,7 +51,7 @@ def process_download():
     except Exception as e:
         print("Download error:", str(e))
 
-def stop():
+def stop(): # Botão de stop com atribuições de variaveis globais
 
     global status, stop_processing
     status = False
