@@ -1,4 +1,3 @@
-import sys
 import customtkinter as ctk
 
 class StdoutRedirector:
