@@ -12,7 +12,7 @@ def create_frame_main(): # Criando frame principal
     global tempo
 
     frame_main = ctk.CTk()
-    frame_main.geometry("430x225") # Defini a largura e altura do frame respectivamente
+    frame_main.geometry("480x225") # Defini a largura e altura do frame respectivamente
     frame_main.title("FSJEDI")
     frame_main.resizable(False, False) # Tira a opção de maximizar
 
@@ -33,7 +33,7 @@ def create_frame_main(): # Criando frame principal
     b_stop.configure(font=("arial", 14))
     b_stop.place(x=5, y=130)
 
-    log = ctk.CTkTextbox(master=frame_main, width=300, height=145)
+    log = ctk.CTkTextbox(master=frame_main, width=350, height=145)
     log.configure(font=("arial", 12))
     log.place(x=120, y=55)
 
