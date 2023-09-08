@@ -25,7 +25,7 @@ def create_frame_main(): # Criando frame principal
     # Criando botões de execução (start, pause, log)
     b_start = ctk.CTkButton(master=frame_main, width=100, height=70, text="Iniciar", corner_radius=4, command=start,
                             fg_color="dark grey", text_color="black", hover_color="gray")
-    b_start.configure(font=("arial", 14))
+    b_start.configure(font=("arial", 14) )
     b_start.place(x=5, y=55)
 
     b_stop = ctk.CTkButton(master=frame_main, width=100, height=70, text="Pausar", corner_radius=4, command=stop,
