@@ -11,4 +11,4 @@ O código é estruturado de forma modular e possui uma documentação abrangente
 
 A integração FTP é realizada por meio de bibliotecas e módulos padronizados, permitindo a fácil adaptação para diferentes ambientes de servidor FTP, caso seja necessário. Além disso, são incluídos testes automatizados para validar as funcionalidades principais e evitar regressões ao longo do desenvolvimento do código.
 
-Este projeto visa otimizar e automatizar o processo de importação e processamento de pedidos no ERP Infarma, reduzindo o tempo de espera para a realização de pedidos e fornecendo feedback imediato aos fornecedores sobre o status de seus envios. O código é mantido como um repositório público, permitindo que outros desenvolvedores contribuam com melhorias e correções de bugs, ampliando a colaboração e aprimorando a solução ao longo do tempo.
+Este projeto visa otimizar e automatizar o processo de importação e processamento de pedidos no ERP Infarma, reduzindo o tempo de espera para a realização de pedidos.
